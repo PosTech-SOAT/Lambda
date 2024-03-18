@@ -29,7 +29,6 @@ resource "aws_lambda_function" "postech-auth-app" {
 
   # Referência ao arquivo ZIP no bucket S3
   source_code_hash = filebase64sha256("./.serverless/main.zip")
-  s3_bucket        = aws_s3_bucket.bucket-lambda-zip.bucket  # Nome do bucket
   s3_key           = aws_s3_bucket_object.zip.key            # Chave (nome) do arquivo dentro do bucket
 }
 
