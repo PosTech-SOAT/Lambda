@@ -17,12 +17,11 @@ package:
 
 provider:
   name: aws
-  lambda:
-    maxInMemorySize: 314572800 # 300 MB in bytes
   runtime: nodejs18.x
   stage: dev
   region: us-east-1
   role: arn:aws:iam::058264149904:role/LabRole
+  memorySize: 512 # Define a quantidade de memória em MB
 
 functions:
   main:
@@ -34,4 +33,3 @@ functions:
       - http:
           method: ANY
           path: '{proxy+}'
-          
