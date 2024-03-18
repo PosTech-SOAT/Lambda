@@ -1,5 +1,3 @@
-// auth.service.ts
-
 import { Injectable } from '@nestjs/common';
 import {
   CognitoUser,
