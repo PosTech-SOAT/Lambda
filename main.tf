@@ -27,11 +27,9 @@ resource "aws_lambda_function" "postech-auth-app" {
   runtime          = "nodejs18.x"
   
   # Use a propriedade `s3_bucket` e `s3_key` para fazer referência ao arquivo ZIP no S3
-  s3_bucket        = aws_s3_bucket.bucket-lambda-zip.bucket
+  s3_bucket        = aws_s3_bucket.postech-auth-app-zip.bucket
   s3_key           = aws_s3_bucket_object.zip.key
   
-  # Deixe o `filename` vazio, já que estamos referenciando o código no S3
-  filename         = ""
 }
 
 # Recurso para definir a permissão da função Lambda para acessar outros serviços, se necessário
