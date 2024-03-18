@@ -17,6 +17,8 @@ package:
 
 provider:
   name: aws
+  lambda:
+    maxInMemorySize: 314572800 # 300 MB in bytes
   runtime: nodejs18.x
   stage: dev
   region: us-east-1
