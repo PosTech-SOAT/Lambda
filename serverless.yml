@@ -6,7 +6,12 @@ plugins:
 custom:
   serverless-offline:
     httpPort: 3000
-    
+
+package:
+  individually: true
+  exclude:
+    - node_modules/**
+
 provider:
   name: aws
   runtime: nodejs18.x
