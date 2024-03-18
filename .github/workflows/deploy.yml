@@ -19,11 +19,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        
-      - name: Install Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: 'latest'
           
       - name: Build
         env: 
@@ -42,13 +37,6 @@ jobs:
           chmod 600 ~/.aws/credentials
 
       - name: Deploy to Lambda
-        run: npx serverless package
+        run: npx serverless deploy
 
-      - name: Terraform Init
-        run: terraform init
 
-      - name: Terraform Plan
-        run: terraform plan
-
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
