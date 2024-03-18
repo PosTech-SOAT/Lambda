@@ -3,8 +3,8 @@ provider "aws" {
 }
 
 # Criar o bucket S3
-resource "aws_s3_bucket" "bucket-lambda-zip" {
-  bucket = "bucket-lambda-zip" 
+resource "aws_s3_bucket" "postech-auth-zip" {
+  bucket = "postech-auth-zip" 
 
   # Configurações adicionais, se necessário
   acl    = "private"  # Define as permissões de acesso do bucket. Por padrão, é "private".
@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "bucket-lambda-zip" {
 
 # Criar e fazer upload de um arquivo para o bucket S3
 resource "aws_s3_bucket_object" "zip" {
-  bucket = aws_s3_bucket.bucket-lambda-zip.id  
+  bucket = aws_s3_bucket.postech-auth-zip.id  
   key    = "main.zip"  # Nome do arquivo dentro do bucket
   source = "./.serverless/main.zip"    # Substitua pelo caminho local do seu arquivo
 
@@ -27,7 +27,7 @@ resource "aws_lambda_function" "postech-auth-app" {
   runtime          = "nodejs18.x"
   
   # Use a propriedade `s3_bucket` e `s3_key` para fazer referência ao arquivo ZIP no S3
-  s3_bucket        = aws_s3_bucket.postech-auth-app-zip.bucket
+  s3_bucket        = aws_s3_bucket.postech-auth-zip.bucket
   s3_key           = aws_s3_bucket_object.zip.key
   
 }
