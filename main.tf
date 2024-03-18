@@ -21,15 +21,17 @@ resource "aws_s3_bucket_object" "zip" {
 }
 
 resource "aws_lambda_function" "postech-auth-app" {
-  function_name = "postech-auth-app"
-  role          = "arn:aws:iam::058264149904:role/LabRole"  # Substitua pelo ARN da sua função IAM
-  handler       = "main.handler"
-  runtime       = "nodejs18.x"
-  filename      = "main.zip"  # Nome do arquivo dentro do bucket
-
-  # Referência ao arquivo ZIP no bucket S3
-  source_code_hash = filebase64sha256("./.serverless/main.zip")
-  s3_key           = aws_s3_bucket_object.zip.key            # Chave (nome) do arquivo dentro do bucket
+  function_name    = "postech-auth-app"
+  role             = "arn:aws:iam::058264149904:role/LabRole"  # Substitua pelo ARN da sua função IAM
+  handler          = "index.handler"
+  runtime          = "nodejs18.x"
+  
+  # Use a propriedade `s3_bucket` e `s3_key` para fazer referência ao arquivo ZIP no S3
+  s3_bucket        = aws_s3_bucket.bucket-lambda-zip.bucket
+  s3_key           = aws_s3_bucket_object.zip.key
+  
+  # Deixe o `filename` vazio, já que estamos referenciando o código no S3
+  filename         = ""
 }
 
 # Recurso para definir a permissão da função Lambda para acessar outros serviços, se necessário
