@@ -1,4 +1,4 @@
-service: fiap-postech-auth-serveless
+service: postech-auth-app
 
 plugins:
   - serverless-offline
@@ -9,7 +9,10 @@ custom:
     
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs18.x
+  stage: dev
+  region: us-east-1
+  role: arn:aws:iam::058264149904:role/LabRole
 
 functions:
   main:
