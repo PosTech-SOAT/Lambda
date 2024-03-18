@@ -9,8 +9,11 @@ custom:
 
 package:
   individually: true
+  excludeDevDependencies: true
+  include:
+    - dist/**
   exclude:
-    - node_modules/**
+    - "node_modules/**"
 
 provider:
   name: aws
