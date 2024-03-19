@@ -22,7 +22,10 @@ export class AuthService {
     });
   }
 
-  async authenticate(cpf: string, password: string): Promise<string> {
+  async authenticate(
+    cpf: string,
+    password: string,
+  ): Promise<Record<string, string>> {
     const authenticationData = {
       Username: cpf,
       Password: password,
@@ -37,18 +40,10 @@ export class AuthService {
 
     const cognitoUser = new CognitoUser(userData);
 
-    return new Promise<string>((resolve, reject) => {
+    return new Promise<Record<string, string>>((resolve, reject) => {
       cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: (result) => {
-          const payload = {
-            sub: result.getIdToken().getJwtToken(),
-            exp: Math.floor(Date.now() / 1000) + 60 * 60, // 1 hora de validade
-            iss: 'cognito',
-            token_use: 'id',
-          };
-
-          const token = jwt.sign(payload, generateSecretKey());
-          resolve(token);
+          resolve({ token: result.getIdToken().getJwtToken() });
         },
         onFailure: (error) => {
           console.log(error);
