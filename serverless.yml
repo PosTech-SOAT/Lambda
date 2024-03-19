@@ -10,6 +10,8 @@ custom:
 package:
   exclude:
     - "aws/**"
+    - "awscliv2.zip"
+
 
 provider:
   name: aws
