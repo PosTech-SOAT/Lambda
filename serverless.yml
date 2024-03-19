@@ -8,12 +8,7 @@ custom:
     httpPort: 3000
 
 package:
-  individually: true
-  excludeDevDependencies: true
-  include:
-    - dist/**
   exclude:
-    - "node_modules/**"
     - "aws/**"
 
 provider:
@@ -22,7 +17,6 @@ provider:
   stage: dev
   region: us-east-1
   role: arn:aws:iam::058264149904:role/LabRole
-  memorySize: 512 # Define a quantidade de memória em MB
 
 functions:
   main:
