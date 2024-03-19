@@ -16,7 +16,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '18'
-          
+
+      - name: Write Environnment Variables
+        run: echo "${{ secrets.APP_ENV }}" > .env
+      
       - name: Install yarn dependencies
         run: yarn
         
@@ -37,9 +40,5 @@ jobs:
           chmod 600 ~/.aws/credentials
 
       - name: Deploy to Lambda
-        env: 
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_USER_POOL_ID: ${{ secrets.AWS_USER_POOL_ID }}
-          AWS_CLIENT_ID: ${{ secrets.AWS_CLIENT_ID }}
         run: npx serverless deploy
 
