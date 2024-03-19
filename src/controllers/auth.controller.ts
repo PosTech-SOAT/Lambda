@@ -14,9 +14,9 @@ export class AuthController {
   async login(
     @Body('username') username: string,
     @Body('password') password: string,
-  ): Promise<{ token: string }> {
+  ): Promise<Record<string, string>> {
     const token = await this.authService.authenticate(username, password);
-    return { token };
+    return token;
   }
 
   @Post('signup')
