@@ -1,5 +1,3 @@
-// cognito.service.ts
-
 import { Injectable } from '@nestjs/common';
 import {
   CognitoUserPool,
